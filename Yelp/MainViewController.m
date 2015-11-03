@@ -10,9 +10,10 @@
 #import "YelpBusiness.h"
 #import "YelpClient.h"
 #import "BusinessCell.h"
+#import "FiltersViewController.h"
 
-@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate>
-
+@interface MainViewController ()<UITableViewDataSource, UITableViewDelegate, FiltersViewControllerDelegate>
+- (void)fetchBusinessesWithQuery: (NSString *) query params: (NSDictionary *)params;
 @end
 
 @implementation MainViewController
@@ -39,7 +40,30 @@
                       }];
     
     self.title = @"Yelp";
+    // Navigation Button
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Filters" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButtonPressed)];
+    // UI Search Bar
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    self.navigationItem.titleView = searchBar;
 }
+
+- (void)fetchBusinessesWithQuery: (NSString *) query params: (NSDictionary *)params {
+    
+    NSLog(@"query: %@ categories: %@",query,params[@"category_filter"]);
+    [YelpBusiness searchWithTerm:query
+                        sortMode:YelpSortModeBestMatched
+                      categories:params[@"category_filter"]
+                           deals:NO
+                      completion:^(NSArray *businesses, NSError *error) {
+                          for (YelpBusiness *business in businesses) {
+                              NSLog(@"%@", business);
+                          }
+                          self.businesses = businesses;
+                          [self.tableView reloadData];
+                      }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -56,5 +80,20 @@
     cell.business = self.businesses[indexPath.row];
     return cell;
 }
+
+- (void)filtersViewController:(FiltersViewController *)filtersViewController didChangeFilters:(NSDictionary *)filters {
+    NSLog(@"Fire a new network event: filters = %@", filters);
+    [self fetchBusinessesWithQuery:@"Restaurants" params:filters];
+}
+
+#pragma mark - Private methods
+- (void)onFilterButtonPressed {
+    FiltersViewController *vc = [[FiltersViewController alloc]init];
+    vc.delegate = self;
+    UINavigationController *nvc = [[UINavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:nvc animated:YES completion:nil];
+    
+}
+
 
 @end
