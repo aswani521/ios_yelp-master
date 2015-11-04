@@ -232,6 +232,9 @@
     if (self.selectedDeal.count>0) {
         [filters setObject:@1 forKey:@"offeringDeal"];
     }
+//    else {
+//        [filters setObject:@0 forKey:@"offeringDeal"];
+//    }
     
     if (self.selectedSort.count>0) {
         [filters setObject:self.selectedSort forKey:@"sortMode"];
@@ -242,6 +245,9 @@
     if (self.selectedDistance.count>0) {
         [filters setValue:self.selectedDistance forKey:@"radius"];
     }
+//    else {
+//        [filters setValue:self.distances[0][@"code"] forKey:@"radius"];
+//    }
     
     return filters;
     

@@ -39,6 +39,11 @@
 
 - (void)fetchBusinessesWithQuery: (NSString *) query params: (NSDictionary *)params {
     NSNumber *sortMode = params[@"sortMode"][0];
+//    NSNumber *radius = nil;
+//    if(params[@"radius"] >0){
+//        radius = params[@"radius"][0];
+//    }
+    
     NSLog(@"query: %@ categories: %@, sortMode: %@, hasDeal: %@, radius: %@",query,params[@"category_filter"],sortMode,params[@"offeringDeal"],params[@"radius"][0]);
     
     [YelpBusiness searchWithTerm:query
