@@ -27,17 +27,7 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 120;
     
-    [YelpBusiness searchWithTerm:@"Restaurants"
-                        sortMode:YelpSortModeBestMatched
-                      categories:@[@"burgers"]
-                           deals:NO
-                      completion:^(NSArray *businesses, NSError *error) {
-                          for (YelpBusiness *business in businesses) {
-                              NSLog(@"%@", business);
-                          }
-                          self.businesses = businesses;
-                          [self.tableView reloadData];
-                      }];
+    [self fetchBusinessesWithQuery:@"Restaurants" params:nil];
     
     self.title = @"Yelp";
     // Navigation Button
@@ -48,12 +38,14 @@
 }
 
 - (void)fetchBusinessesWithQuery: (NSString *) query params: (NSDictionary *)params {
+    NSNumber *sortMode = params[@"sortMode"][0];
+    NSLog(@"query: %@ categories: %@, sortMode: %@, hasDeal: %@, radius: %@",query,params[@"category_filter"],sortMode,params[@"offeringDeal"],params[@"radius"][0]);
     
-    NSLog(@"query: %@ categories: %@",query,params[@"category_filter"]);
     [YelpBusiness searchWithTerm:query
-                        sortMode:YelpSortModeBestMatched
+                        sortMode:[sortMode integerValue]  //YelpSortModeBestMatched
                       categories:params[@"category_filter"]
-                           deals:NO
+                           deals:params[@"offeringDeal"]
+                          radius:params[@"radius"][0]
                       completion:^(NSArray *businesses, NSError *error) {
                           for (YelpBusiness *business in businesses) {
                               NSLog(@"%@", business);

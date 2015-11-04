@@ -45,11 +45,13 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
 
 - (AFHTTPRequestOperation *)searchWithTerm:(NSString *)term
                                 completion:(void (^)(NSArray *businesses, NSError *error))completion {
+    NSNumber *maxRadius = [NSNumber numberWithInt:40000];
     
     return [self searchWithTerm:term
                        sortMode:YelpSortModeBestMatched
                      categories:nil
                           deals:NO
+                         radius:maxRadius
                      completion:completion];
 }
 
@@ -57,9 +59,12 @@ NSString * const kYelpTokenSecret = @"mqtKIxMIR4iBtBPZCmCLEb-Dz3Y";
                                   sortMode:(YelpSortMode)sortMode
                                 categories:(NSString *)categories
                                      deals:(BOOL)hasDeal
+                                    radius:(NSNumber *) radius
                                 completion:(void (^)(NSArray *businesses, NSError *error))completion {
     
     NSLog(@"categories: %@",categories);
+    NSLog(@"hasDeal: %d", hasDeal);
+    NSLog(@"sortMode: %ld", sortMode);
     
     // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
     NSMutableDictionary *parameters = [@{@"term": term,

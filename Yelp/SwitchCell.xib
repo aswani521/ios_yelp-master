@@ -16,13 +16,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jpW-uM-G0a">
-                        <rect key="frame" x="12" y="18" width="42" height="20.5"/>
+                        <rect key="frame" x="16" y="18" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="15t-pq-Fk3">
-                        <rect key="frame" x="264" y="12" width="51" height="32.5"/>
+                        <rect key="frame" x="264" y="12" width="51" height="31"/>
                         <connections>
                             <action selector="switchValChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="Ys1-Xu-34z"/>
                         </connections>
@@ -33,7 +33,7 @@
                     <constraint firstItem="15t-pq-Fk3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bfQ-cR-g38"/>
                     <constraint firstItem="15t-pq-Fk3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="4" id="evS-BB-KA8"/>
                     <constraint firstAttribute="trailingMargin" secondItem="15t-pq-Fk3" secondAttribute="trailing" constant="4" id="imE-pb-N22"/>
-                    <constraint firstItem="jpW-uM-G0a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="4" id="nWa-Fk-d7H"/>
+                    <constraint firstItem="jpW-uM-G0a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="nWa-Fk-d7H"/>
                     <constraint firstItem="jpW-uM-G0a" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tEl-0p-hET"/>
                 </constraints>
                 <variation key="default">
